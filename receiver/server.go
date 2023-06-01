@@ -44,6 +44,10 @@ func (server *Server) setupRouter() {
 	// add the route for saveing messages
 	router.POST("/save", server.saveMessage)
 
+	// add the routes for liveness and readiness
+	router.GET("/health", server.health)
+	router.GET("/readiness", server.health)
+
 	// set the router to the server object
 	server.router = router
 }

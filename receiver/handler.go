@@ -45,3 +45,10 @@ func (server *Server) saveMessage(ctx *gin.Context) {
 	// return a 200 OK response
 	ctx.JSON(200, gin.H{"status": "ok"})
 }
+
+
+// health handles the "/health" route.
+func (server *Server) health(ctx *gin.Context) {
+	// return a 200 OK response
+	ctx.JSON(200, gin.H{"status": "healthy"})
+}

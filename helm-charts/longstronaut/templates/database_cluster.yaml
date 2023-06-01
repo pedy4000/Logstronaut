@@ -5,7 +5,7 @@ metadata:
 spec:
   engine: pg
   name: {{ include "logstronaut.fullname" . }}-db
-  version: '8'
+  version: '13'
   numNodes: 1
   size: db-s-1vcpu-1gb
   region: ams3

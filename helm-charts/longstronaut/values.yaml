@@ -4,6 +4,9 @@
 
 replicaCount: 3
 
+logstronaut:
+  port: 8080
+
 image:
   repository: registry.digitalocean.com/pedram/logstronaut
   pullPolicy: Always

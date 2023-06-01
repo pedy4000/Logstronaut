@@ -6,6 +6,7 @@ replicaCount: 3
 
 logstronaut:
   port: 8080
+  configMap: 'logstronaut-cm'
 
 image:
   repository: registry.digitalocean.com/pedram/logstronaut

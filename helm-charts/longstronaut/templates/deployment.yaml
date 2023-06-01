@@ -36,9 +36,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Values.logstronaut.configMap }}
-          volumeMounts:
-            - mountPath: /tmp
-              name: pvc-{{ include "logstronaut.fullname" . }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -53,10 +50,6 @@ spec:
               port: 8080
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      volumes:
-        - name: pvc-{{ include "logstronaut.fullname" . }}
-          persistentVolumeClaim:
-            claimName: pvc-{{ include "logstronaut.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -1,0 +1,10 @@
+apiVersion: databases.digitalocean.com/v1alpha1
+kind: DatabaseUser
+metadata:
+  name: {{ include "logstronaut.fullname" . }}-db-user
+spec:
+  databaseCluster:
+    apiGroup: databases.digitalocean.com
+    kind: DatabaseCluster
+    name: {{ include "logstronaut.fullname" . }}-db
+  username: {{ include "logstronaut.fullname" . }}

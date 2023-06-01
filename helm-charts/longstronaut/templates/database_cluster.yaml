@@ -1,0 +1,11 @@
+apiVersion: databases.digitalocean.com/v1alpha1
+kind: DatabaseCluster
+metadata:
+  name: {{ include "logstronaut.fullname" . }}-db
+spec:
+  engine: pg
+  name: {{ include "logstronaut.fullname" . }}-db
+  version: '8'
+  numNodes: 1
+  size: db-s-1vcpu-1gb
+  region: ams3

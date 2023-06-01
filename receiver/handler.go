@@ -2,9 +2,9 @@ package receiver
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/gin-gonic/gin"
+	db "github.com/pedy4000/logstronaut/db/sqlc"
 	"github.com/rs/zerolog/log"
 )
 
@@ -25,30 +25,24 @@ func (server *Server) saveMessage(ctx *gin.Context) {
 	}
 
 	// saves the message the remote procedure
-	myfile, err := os.OpenFile(server.config.StorageDestination, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
-	if err != nil {
-		log.Error().Err(err).Msg("error while accessing target file")
-		ctx.JSON(500, errorResponse(fmt.Errorf("error while accessing target file")))
-		return
-	}
-	defer myfile.Close()
-
-	// Write the string to the file
-	_, err = myfile.WriteString(request.Message + "\n")
+	msg, err := db.New(server.dbConn).StoreMessage(ctx, request.Message)
 	if err != nil {
 		// if the RPC call returns an error, return a 500 error
-		log.Error().Err(err).Msg("error while writing string")
-		ctx.JSON(500, errorResponse(fmt.Errorf("error in saving message")))
+		log.Error().Err(err).Msg("error while saving message content")
+		ctx.JSON(500, errorResponse(fmt.Errorf("error while saving message")))
 		return
 	}
 
 	// return a 200 OK response
-	ctx.JSON(200, gin.H{"status": "ok"})
+	ctx.JSON(200, msg)
 }
-
 
 // health handles the "/health" route.
 func (server *Server) health(ctx *gin.Context) {
 	// return a 200 OK response
+	if err := server.dbConn.Ping(); err != nil {
+		ctx.JSON(503, errorResponse(err))
+		return
+	}
 	ctx.JSON(200, gin.H{"status": "healthy"})
 }

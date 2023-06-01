@@ -33,6 +33,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: DB_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "logstronaut.fullname" . }}-db-default-credentials
+                  key: private_uri
           envFrom:
             - configMapRef:
                 name: {{ .Values.logstronaut.configMap }}

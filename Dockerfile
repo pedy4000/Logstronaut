@@ -9,11 +9,8 @@ RUN make build
 FROM alpine:3.16
 WORKDIR /app
 COPY --from=builder /app/bin/server .
-
-# Use config maps over copying app.env in the image
 COPY app.env .
-
-EXPOSE 8080
+COPY db/migration ./db/migration
 
 CMD [ "" ]
 ENTRYPOINT [ "/app/server" ]

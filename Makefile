@@ -9,6 +9,9 @@ clear-log:
 create-bin-folder:
 	@mkdir -p bin
 
+sqlc:
+	sqlc generate
+
 # Build-All is used to build all services separately
 build: create-bin-folder
 	@echo "Building Logstronaut Service..."

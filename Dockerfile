@@ -11,7 +11,7 @@ WORKDIR /app
 COPY --from=builder /app/bin/server .
 
 # Use config maps over copying app.env in the image
-# COPY app.env .
+COPY app.env .
 
 EXPOSE 8080
 

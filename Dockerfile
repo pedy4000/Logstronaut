@@ -1,6 +1,8 @@
 FROM golang:1.19-alpine3.16 AS builder
 WORKDIR /app
 COPY . .
+
+RUN apk add -q build-base 
 RUN make build
 
 # Run stage (will remove source code in order to reduce image size)

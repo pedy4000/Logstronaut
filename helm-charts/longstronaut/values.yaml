@@ -15,8 +15,8 @@ image:
   tag: 'latest'
 
 imagePullSecrets: [{ 'name': 'my-image-pull-secret' }]
-nameOverride: ''
-fullnameOverride: ''
+nameOverride: 'logstronaut-app'
+fullnameOverride: 'logstronaut-chart'
 
 serviceAccount:
   # Specifies whether a service account should be created

@@ -56,9 +56,9 @@ ingress:
   
   hosts:
     - host: app.domain
-      service: logstronaut-chart
+      service: app.service
     - host: argocd.domain
-      service: argocd-server
+      service: argocd.service
 
   tls: []
   #  - secretName: chart-example-tls

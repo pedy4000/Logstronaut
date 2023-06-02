@@ -1,8 +1,10 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
+  namespace: kube-prometheus-stack
   labels:
     serviceMonitorSelector: prometheus
+    release: prometheus
   name: {{ include "logstronaut.fullname" . }}-svc-monit
 spec:
   endpoints:

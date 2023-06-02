@@ -38,16 +38,14 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
           - backend:
               service:
-                name: {{ .service }}
+                name: {{ include "logstronaut.fullname" . }}
                 port:
                   number: 80
             path: /
             pathType: ImplementationSpecific
-    {{- end }}
 {{- end }}

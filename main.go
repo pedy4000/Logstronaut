@@ -34,7 +34,7 @@ func main() {
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot connect to db")
 	}
-	
+
 	runDBMigration("file://db/migration", config.DBSource)
 
 	// create receiver service server

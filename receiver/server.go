@@ -5,11 +5,14 @@ package receiver
 
 import (
 	"database/sql"
+	"time"
 
 	ginzerolog "github.com/dn365/gin-zerolog"
 	"github.com/gin-gonic/gin"
 	"github.com/pedy4000/logstronaut/util"
 	"github.com/rs/zerolog/log"
+
+	ginprometheus "github.com/zsais/go-gin-prometheus"
 )
 
 // Server serves HTTP requests for the receiver
@@ -45,6 +48,10 @@ func (server *Server) setupRouter() {
 	// and return a 500 error
 	router.Use(gin.Recovery())
 
+	// add metrics middleware
+	p := ginprometheus.NewPrometheus("gin")
+	p.Use(router)
+
 	// add the route for saveing messages
 	router.POST("/save", server.saveMessage)
 
@@ -61,10 +68,23 @@ func (server *Server) setupRouter() {
 // and wait for the server to stop. in case of peacefull stop, it will return nil.
 func (server *Server) Start() error {
 	log.Info().Str("ser_name", "receiver").Msg("Starting gin server...")
+
+	recordMetrics()
+	log.Info().Msg("recording prom metrics")
+
 	return server.router.Run(server.config.ReceiverAddress)
 }
 
 // errorResponse is a helper function to create a gin.H map with the error key and the error message.
 func errorResponse(err error) gin.H {
 	return gin.H{"error": err.Error()}
+}
+
+func recordMetrics() {
+	go func() {
+		for {
+			opsProcessed.Inc()
+			time.Sleep(2 * time.Second)
+		}
+	}()
 }

@@ -24,6 +24,8 @@ func (server *Server) saveMessage(ctx *gin.Context) {
 		return
 	}
 
+	bytesSaved.Add(float64(len(request.Message)))
+
 	// saves the message the remote procedure
 	msg, err := db.New(server.dbConn).StoreMessage(ctx, request.Message)
 	if err != nil {
@@ -34,7 +36,7 @@ func (server *Server) saveMessage(ctx *gin.Context) {
 	}
 
 	// return a 200 OK response
-	ctx.JSON(200, msg)
+	ctx.JSON(201, msg)
 }
 
 // health handles the "/health" route.

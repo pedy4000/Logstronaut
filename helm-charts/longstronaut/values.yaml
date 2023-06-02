@@ -56,17 +56,9 @@ ingress:
   
   hosts:
     - host: app.domain
-      paths:
-        - path: /
-          service: logstronaut-chart
-          port: 80
-          pathType: ImplementationSpecific
+      service: logstronaut-chart
     - host: argocd.domain
-      paths:
-        - path: /
-          service: argocd-server
-          port: 80
-          pathType: ImplementationSpecific
+      service: argocd-server
 
   tls: []
   #  - secretName: chart-example-tls

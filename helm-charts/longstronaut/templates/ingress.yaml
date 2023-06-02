@@ -42,21 +42,12 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-            pathType: {{ .pathType }}
-            {{- end }}
-            backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+          - backend:
               service:
                 name: {{ .service }}
                 port:
-                  number: {{ .port }}
-              {{- else }}
-              serviceName: {{ .service }}
-              servicePort: {{ .port }}
-              {{- end }}
-          {{- end }}
+                  number: 80
+            path: /
+            pathType: ImplementationSpecific
     {{- end }}
 {{- end }}

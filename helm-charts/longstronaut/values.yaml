@@ -55,13 +55,13 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   
   hosts:
-    - host: 'app.domain'
+    - host: app.domain
       paths:
         - path: /
           service: logstronaut-chart
           port: 80
           pathType: ImplementationSpecific
-    - host: 'argocd.domain'
+    - host: argocd.domain
       paths:
         - path: /
           service: argocd-server

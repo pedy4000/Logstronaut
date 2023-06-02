@@ -9,6 +9,9 @@ spec:
   - interval: 30s
     targetPort: {{ .Values.service.port }}
     path: /metrics
-  selector:
+  namespaceSelector:
     matchNames:
-    - {{ include "logstronaut.fullname" . }}
+    - prometheus
+  selector:
+    matchLabels:
+      app: {{ include "logstronaut.fullname" . }}

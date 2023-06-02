@@ -34,6 +34,7 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "logstronaut.labels" -}}
+app: {{ include "logstronaut.fullname" . }}
 helm.sh/chart: {{ include "logstronaut.chart" . }}
 {{ include "logstronaut.selectorLabels" . }}
 {{- if .Chart.AppVersion }}

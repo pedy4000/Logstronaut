@@ -16,4 +16,13 @@ spec:
             name: argocd-server
             port:
               name: http
+  {{- if .Values.ingress.tls }}
   tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}

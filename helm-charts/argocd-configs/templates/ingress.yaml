@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: argocd-server-ingress-external
   namespace: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    kubernetes.io/ingress.class: "nginx"
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:

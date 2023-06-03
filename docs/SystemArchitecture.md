@@ -17,7 +17,7 @@ The entire cluster is strategically located in Amsterdam to optimize data handli
 
 In order to maintain code quality and ensure quick and reliable deployments, we've established a CI/CD pipeline that uses **GitHub Actions** and **ArgoCD**. The flow of operations is as follows:
 
-1. **GitHub Actions**: Handles the building and testing of the Docker image.
+1. **[GitHub Actions](../.github/workflows/docker-image.yml)**: Handles the building and testing of the Docker image.
 2. **DigitalOcean Registry**: A secure space where our Docker image is stored post-build.
 3. **ArgoCD**: Monitors the Helm charts in our repository and synchronizes them with the Kubernetes clusters.
 

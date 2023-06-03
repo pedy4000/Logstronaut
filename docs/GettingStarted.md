@@ -29,3 +29,5 @@ To run a Docker container from the image you created:
 1. From the terminal, run `docker run -p 80:8080 logstronaut`
 
 This will start a Docker container, mapping the container's port 8000 to port 8000 on your host machine.
+
+**Note**: Before building the image, you have to create an `app.env` file with example values, as provided in `app.env.example`. The `DB_ADDRESS` should be the full URI address of the database, and `RECEIVER_ADDRESS` should be the address of the backend that will go up on it.

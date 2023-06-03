@@ -29,8 +29,8 @@ Config stores all configuration of the application. The values are read by viper
 
 ```go
 type Config struct {
-    Environment string `mapstructure:"ENVIRONMENT"`
-
+    Environment        string `mapstructure:"ENVIRONMENT"`
+    DBSource           string `mapstructure:"DB_ADDRESS"`
     ReceiverAddress    string `mapstructure:"RECEIVER_ADDRESS"`
     StorageDestination string `mapstructure:"STORAGE_DESTINATION"`
 }

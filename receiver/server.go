@@ -65,7 +65,7 @@ func (server *Server) setupRouter() {
 
 // Start runs the Gin HTTP server
 // it will return an error if the server fails to start, otherwise it will block the thread
-// and wait for the server to stop. in case of peacefull stop, it will return nil.
+// and wait for the server to stop. in case of a peaceful stop, it will return nil.
 func (server *Server) Start() error {
 	log.Info().Str("ser_name", "receiver").Msg("Starting gin server...")
 

@@ -11,11 +11,11 @@ package receiver implements the HTTP handler for the logstronaut. it receives me
 ## Index
 
 - [type Server](<#type-server>)
-  - [func NewServer(config util.Config) (*Server, error)](<#func-newserver>)
+  - [func NewServer(config util.Config, dbConn *sql.DB) (*Server, error)](<#func-newserver>)
   - [func (server *Server) Start() error](<#func-server-start>)
 
 
-## type [Server](<https://github.com/pedy4000/Logstronaut/blob/main/receiver/server.go#L14-L17>)
+## type [Server](<https://github.com/pedy4000/Logstronaut/blob/main/receiver/server.go#L19-L23>)
 
 Server serves HTTP requests for the receiver
 
@@ -25,15 +25,15 @@ type Server struct {
 }
 ```
 
-### func [NewServer](<https://github.com/pedy4000/Logstronaut/blob/main/receiver/server.go#L20>)
+### func [NewServer](<https://github.com/pedy4000/Logstronaut/blob/main/receiver/server.go#L26>)
 
 ```go
-func NewServer(config util.Config) (*Server, error)
+func NewServer(config util.Config, dbConn *sql.DB) (*Server, error)
 ```
 
 NewServer creates a new HTTP server and set up routing.
 
-### func \(\*Server\) [Start](<https://github.com/pedy4000/Logstronaut/blob/main/receiver/server.go#L54>)
+### func \(\*Server\) [Start](<https://github.com/pedy4000/Logstronaut/blob/main/receiver/server.go#L69>)
 
 ```go
 func (server *Server) Start() error
